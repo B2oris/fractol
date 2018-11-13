@@ -1,6 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: beborch <beborch@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/10/12 23:21:48 by beborch           #+#    #+#              #
+#    Updated: 2018/10/12 23:38:16 by beborch          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME := fractol
 
-SRC =  main.c
+SRC =  srcs/main.c srcs/mandelbrot.c srcs/burning_ship.c srcs/color.c srcs/julia.c srcs/hook.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -13,13 +25,13 @@ MLX := -lmlx -framework OpenGL -framework AppKit
 LIBS := -Llibft/ -lft
 
 all : $(NAME)
-# penser a remettre les flags
+
 $(NAME) : $(OBJ)
 	make -C mlx/
 	make -C libft/
-	gcc $(INCLUDES) -g $(LIBS) $(OBJ) $(MLX) -o $(NAME)
+	gcc $(INCLUDES) $(FLAGS) -g $(LIBS) $(OBJ) $(MLX) -o $(NAME)
 
-%.o: %.c ./fractol.h
+%.o: %.c ./includes/fractol.h
 	gcc -g $(INCLUDES) -o $@ -c $< 
 
 clean :
